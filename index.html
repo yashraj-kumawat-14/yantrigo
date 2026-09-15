@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YourPackage — Fast & Elegant Python Library</title>
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-heading: #f0f6fc;
+      --accent: #3b82f6;
+      --accent-hover: #2563eb;
+      --accent-subtle: rgba(59, 130, 246, 0.15);
+      --code-bg: #090d13;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Navigation */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--text-heading);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: var(--text-heading);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 50px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: #8b949e;
+      max-width: 650px;
+      margin: 0 auto 24px;
+    }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .badges img {
+      height: 20px;
+    }
+
+    /* Install Box */
+    .install-box {
+      display: inline-flex;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      gap: 12px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .install-cmd {
+      color: #79c0ff;
+    }
+    .copy-btn {
+      background: transparent;
+      border: none;
+      color: #8b949e;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .copy-btn:hover {
+      color: var(--text-heading);
+    }
+
+    /* CTAs */
+    .cta-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+    }
+    .btn {
+      padding: 10px 22px;
+      border-radius: 6px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background-color: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+    }
+    .btn-secondary {
+      background-color: var(--card-bg);
+      color: var(--text-heading);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background-color: #21262d;
+    }
+
+    /* Code Preview */
+    .code-preview {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 40px auto;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+    .code-preview pre {
+      margin: 0;
+    }
+
+    /* Syntax Highlighting Mock */
+    .kw { color: #ff7b72; }
+    .fn { color: #d2a8ff; }
+    .str { color: #a5d6ff; }
+    .cm { color: #8b949e; }
+
+    /* Features Section */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 60px 0;
+    }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #58a6ff;
+    }
+    .card-icon {
+      font-size: 1.5rem;
+      color: #58a6ff;
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      color: var(--text-heading);
+      margin-bottom: 8px;
+      font-size: 1.15rem;
+    }
+    .card p {
+      color: #8b949e;
+      font-size: 0.95rem;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+      color: #8b949e;
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .cta-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <i class="fa-brands fa-python" style="color: #ffd43b;"></i>
+        <span>your_package</span>
+      </a>
+      <div class="nav-links">
+        <a href="#quickstart">Quick Start</a>
+        <a href="#features">Features</a>
+        <a href="https://github.com/your-username/your-repo" target="_blank">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Simple. Blazing Fast. Elegant.</h1>
+      <p>A modern, lightweight Python library built for data processing and async workflows with minimal dependencies.</p>
+      
+      <!-- Badges (Replace 'your-username' and 'your-repo') -->
+      <div class="badges">
+        <img src="https://img.shields.io/pypi/v/your-package?color=blue&style=flat-square" alt="PyPI version" />
+        <img src="https://img.shields.io/pypi/pyversions/your-package?style=flat-square" alt="Python versions" />
+        <img src="https://img.shields.io/github/license/your-username/your-repo?style=flat-square" alt="License" />
+        <img src="https://img.shields.io/github/stars/your-username/your-repo?style=flat-square" alt="GitHub stars" />
+      </div>
+
+      <!-- Quick Install Box -->
+      <div>
+        <div class="install-box">
+          <span>$</span>
+          <span id="install-text" class="install-cmd">pip install your-package</span>
+          <button class="copy-btn" onclick="copyInstall()" title="Copy to clipboard">
+            <i id="copy-icon" class="fa-regular fa-clone"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Call to Actions -->
+      <div class="cta-buttons">
+        <a href="#quickstart" class="btn btn-primary">Get Started</a>
+        <a href="https://github.com/your-username/your-repo" target="_blank" class="btn btn-secondary">
+          <i class="fa-brands fa-github"></i> Star on GitHub
+        </a>
+      </div>
+
+      <!-- Code Demo Box -->
+      <div class="code-preview" id="quickstart">
+<pre><code><span class="cm"># Quickstart Example</span>
+<span class="kw">from</span> your_package <span class="kw">import</span> Engine, Client
+
+<span class="cm"># Initialize engine</span>
+engine = Engine(workers=<span class="str">4</span>)
+
+<span class="cm"># Run async pipeline</span>
+results = engine.process(<span class="str">"https://example.com/dataset.csv"</span>)
+<span class="fn">print</span>(results.summary())
+</code></pre>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="card">
+        <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3>High Performance</h3>
+        <p>Optimized with zero runtime overhead, built on modern async conventions and primitives.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fa-solid fa-feather"></i></div>
+        <h3>Zero Bloat</h3>
+        <p>Zero or minimal third-party dependencies to keep your supply chain lean and safe.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+        <h3>Type Hinted</h3>
+        <p>Comes with 100% type annotations out of the box for supreme editor autocompletion and mypy compliance.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>Released under the MIT License • Maintained by <a href="https://github.com/your-username" target="_blank">@your-username</a></p>
+    </div>
+  </footer>
+
+  <script>
+    function copyInstall() {
+      const text = document.getElementById('install-text').innerText;
+      const icon = document.getElementById('copy-icon');
+      navigator.clipboard.writeText(text).then(() => {
+        icon.classList.remove('fa-clone');
+        icon.classList.add('fa-check');
+        setTimeout(() => {
+          icon.classList.remove('fa-check');
+          icon.classList.add('fa-clone');
+        }, 1500);
+      });
+    }
+  </script>
+</body>
+</html>
